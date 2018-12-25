@@ -17,9 +17,9 @@ public class AddItemCommand implements Command {
     public String execute(HttpServletRequest request) {
         int itemId = Integer.parseInt(request.getParameter("item_id"));
         String name = request.getParameter("name");
-        boolean available = Boolean.parseBoolean(request.getParameter("available"));
+        int number = Integer.parseInt(request.getParameter("number"));
         long price = Long.parseLong(request.getParameter("price"));
-        itemService.addItem(itemId, name, available, price);
+        itemService.addItem(itemId, name, number, price);
         List<Item> items = itemService.getAllItems();
         request.setAttribute("items" , items);
         return "/WEB-INF/itemlist.jsp";

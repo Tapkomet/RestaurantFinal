@@ -9,7 +9,7 @@ public class Item {
     private int id;
     private String name;
     private long price;
-    private boolean available;
+    private int number;
 
     public static Comparator<Item> ItemIdComparator = (s1, s2) -> {
         int id1 = s1.getId();
@@ -35,7 +35,7 @@ public class Item {
                 "id=" + id +
                 ", name='" + name +
                 ", price=" + price +
-                ", available=" + available +
+                ", number=" + number +
                 '}';
     }
 
@@ -44,7 +44,7 @@ public class Item {
         final int PRIME = 31;
         int result = 1;
         result = result * PRIME + this.id;
-        result = result * PRIME + (available ? 1 : 0);
+        result = result * PRIME + this.number;
         result = result * PRIME + (int) (this.price ^ (this.price >>> 32));
         return result;
     }
@@ -55,7 +55,7 @@ public class Item {
         private int id;
         private String name;
         private long price;
-        private boolean available;
+        private int number;
 
         public Builder(int id) {
             this.id = id;
@@ -71,8 +71,8 @@ public class Item {
             return this;
         }
 
-        public Builder isAvailable(boolean available) {
-            this.available = available;
+        public Builder isNumber(int number) {
+            this.number = number;
             return this;
         }
 
@@ -83,7 +83,7 @@ public class Item {
             item.id = this.id;
             item.name = this.name;
             item.price = this.price;
-            item.available = this.available;
+            item.number = this.number;
             return item;
         }
     }

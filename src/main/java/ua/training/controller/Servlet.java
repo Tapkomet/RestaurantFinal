@@ -20,7 +20,7 @@ public class Servlet extends HttpServlet {
     public void init(){
         commands.put("admin/items",
                 new ItemListCommand(new ItemService()));
-        commands.put("admin/additem",
+        commands.put("admin/addItem",
                 new AddItemCommand(new ItemService()));
         commands.put("user-login",
                 new LoginUserCommand(new UserService()));

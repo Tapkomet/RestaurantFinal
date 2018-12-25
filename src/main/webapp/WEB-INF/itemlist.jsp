@@ -25,7 +25,7 @@
         <form action="${pageContext.request.contextPath}/api/admin/addItem'/>" method="post">
              ItemId <input type="number" name="item_id"/><br>
              Name <input type="text" name="name"/><br>
-             Available <input type="checkbox" name="available"/><br>
+             Number in stock <input type="number" name="number"/><br>
              Price <input type="number" name="price"/><br>
              <input type="submit"/>
         </form>

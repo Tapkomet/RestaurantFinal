@@ -14,12 +14,15 @@ public class ItemService {
     public List<Item> getAllItems(){
         try (ItemDao itemDao = daoFactory.createItemDao()) {
             return itemDao.findAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
-    public void addItem(int itemId, String name, boolean available, long price) {
+    public void addItem(int itemId, String name, int number, long price) {
         try (ItemDao itemDao = daoFactory.createItemDao()) {
-            itemDao.addItem(itemId, name, available, itemId);
+            itemDao.addItem(itemId, name, number, itemId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
