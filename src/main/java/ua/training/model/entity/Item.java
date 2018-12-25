@@ -31,7 +31,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Item{" +
                 "id=" + id +
                 ", name='" + name +
                 ", price=" + price +
