@@ -3,11 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, java.text.*" %>
 
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Doctor App</title>
+    <title>Admin Base</title>
 </head>
     <body>
         <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
@@ -15,11 +14,6 @@
         <a href="${pageContext.request.contextPath}/api/logout">Logout</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/admin/items">Item List</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/exception">Exception</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/registration.jsp">Registration</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/admin">Admin</a>
+
     </body>
 </html>

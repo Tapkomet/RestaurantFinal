@@ -4,12 +4,14 @@ import ua.training.controller.commands.*;
 import ua.training.model.service.ItemService;
 import ua.training.model.service.UserService;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Servlet extends HttpServlet {
@@ -17,17 +19,24 @@ public class Servlet extends HttpServlet {
     private ItemService itemService = new ItemService();
     private Map<String, Command> commands = new HashMap<>();
 
-    public void init(){
+    public void init(ServletConfig servletConfig) throws ServletException {
+        super.init(servletConfig);
+        servletConfig.getServletContext()
+                .setAttribute("loggedUsers", new HashSet<String>());
         commands.put("admin/items",
                 new ItemListCommand(new ItemService()));
         commands.put("admin/addItem",
                 new AddItemCommand(new ItemService()));
         commands.put("user-login",
                 new LoginUserCommand(new UserService()));
+        commands.put("logout",
+                new LogoutUserCommand());
         commands.put("user-register",
                 new RegisterUserCommand(new UserService()));
-        commands.put("exception" , new ExceptionCommand());
+        commands.put("exception", new ExceptionCommand());
+        commands.put("admin" , new AdminCommand());
     }
+
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws IOException, ServletException {
@@ -35,10 +44,10 @@ public class Servlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         String path = request.getRequestURI();
-        path = path.replaceAll(".*/api/" , "");
-        Command command = commands.getOrDefault(path , (r)->"/index.jsp)");
+        path = path.replaceAll(".*/api/", "");
+        Command command = commands.getOrDefault(path, (r) -> "/index.jsp)");
         String page = command.execute(request);
-        request.getRequestDispatcher(page).forward(request,response);
+        request.getRequestDispatcher(page).forward(request, response);
         //  response.getWriter().print("Hello from servlet");
     }
 

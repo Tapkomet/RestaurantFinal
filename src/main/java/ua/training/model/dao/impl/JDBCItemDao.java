@@ -28,7 +28,7 @@ public class JDBCItemDao implements ItemDao {
         long price = item.getPrice();
         PreparedStatement stmt = connection.prepareStatement(
                 "insert into item (item_id, name, number, price)" +
-                        " values (?, ?, ?, ?, ?, ?)");
+                        " values (?, ?, ?, ?)");
         stmt.setInt(1, id);
         stmt.setString(2, name);
         stmt.setInt(3, number);
@@ -106,7 +106,7 @@ public class JDBCItemDao implements ItemDao {
     public void addItem(int id, String name, int number, long price) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
                 "insert into item (item_id, name, number, price)" +
-                        " values (?, ?, ?, ?, ?, ?)");
+                        " values (?, ?, ?, ?)");
         stmt.setInt(1, id);
         stmt.setString(2, name);
         stmt.setInt(3, number);

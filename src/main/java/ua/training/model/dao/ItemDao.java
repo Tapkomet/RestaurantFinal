@@ -5,5 +5,5 @@ import ua.training.model.entity.Item;
 import java.sql.SQLException;
 
 public interface ItemDao extends GenericDao<Item> {
-    void addItem(int itemId, String name, int number, long price) throws SQLException;
+    void addItem(int id, String name, int number, long price) throws SQLException;
 }

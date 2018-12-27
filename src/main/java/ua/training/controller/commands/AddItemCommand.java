@@ -15,11 +15,11 @@ public class AddItemCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int itemId = Integer.parseInt(request.getParameter("item_id"));
+        int id = Integer.parseInt(request.getParameter("item_id"));
         String name = request.getParameter("name");
         int number = Integer.parseInt(request.getParameter("number"));
         long price = Long.parseLong(request.getParameter("price"));
-        itemService.addItem(itemId, name, number, price);
+        itemService.addItem(id, name, number, price);
         List<Item> items = itemService.getAllItems();
         request.setAttribute("items" , items);
         return "/WEB-INF/itemlist.jsp";

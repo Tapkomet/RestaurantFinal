@@ -23,7 +23,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public User findById(int id) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "select * from user where code = (?)");
+                "select * from user where user_id = (?)");
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         UserMapper userMapper = new UserMapper();
@@ -66,7 +66,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public void delete(int id) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "delete from user where code = (?)");
+                "delete from user where user_id = (?)");
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
 

@@ -20,9 +20,9 @@ public class ItemService {
         }
     }
 
-    public void addItem(int itemId, String name, int number, long price) {
+    public void addItem(int id, String name, int number, long price) {
         try (ItemDao itemDao = daoFactory.createItemDao()) {
-            itemDao.addItem(itemId, name, number, itemId);
+            itemDao.addItem(id, name, number, price);
         } catch (SQLException e) {
             e.printStackTrace();
         }

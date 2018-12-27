@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Car List</title>
+    <title>Item List</title>
 </head>
     <body>
         <h2>
@@ -15,14 +15,14 @@
         <table>
         <tr><th>Name</th><th>Group</th></tr>
         <c:forEach var="i" items="${items}">
-            <tr><td>${i.itemId}<c:out value="${i.name}"/></td><td>${i.price}</td>
+            <tr><td>${i.id}<c:out value="${i.name}"/></td><td>${i.price}</td>
         </c:forEach>
         </table>
         <br>
         <br>
         <%=request.getAttribute("items")%>
         <br>
-        <form action="${pageContext.request.contextPath}/api/admin/addItem'/>" method="post">
+        <form action="${pageContext.request.contextPath}/api/admin/addItem" method="post">
              ItemId <input type="number" name="item_id"/><br>
              Name <input type="text" name="name"/><br>
              Number in stock <input type="number" name="number"/><br>

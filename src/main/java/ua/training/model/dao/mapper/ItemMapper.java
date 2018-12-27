@@ -15,6 +15,7 @@ public class ItemMapper implements ObjectMapper<Item> {
         item.setId(rs.getInt("item_id"));
         item.setName(rs.getString("name"));
         item.setPrice(rs.getLong("price"));
+        item.setNumber(rs.getInt("number"));
         return item;
     }
 
