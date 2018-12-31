@@ -5,7 +5,10 @@ import org.apache.logging.log4j.Logger;
 import ua.training.model.entity.User;
 import ua.training.model.service.UserService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Optional;
 
 
@@ -20,14 +23,15 @@ public class LoginUserCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         if( email == null || email.equals("") || pass == null || pass.equals("")  ){
-            return "/login.jsp";
+            forward(request, response, "/login.jsp");
         }
         if(CommandUtility.checkUserIsLogged(request, email)){
-            return "/WEB-INF/error.jsp";
+            forward(request, response, "/WEB-INF/error.jsp");
         }
         Optional<User> user = userService.login(email);
         if( user.isPresent() && user.get().getPassword().equals(pass)){
@@ -35,15 +39,15 @@ public class LoginUserCommand implements Command {
             CommandUtility.setUser(request, user.get());
             logger.info("User "+ email+" logged successfully.");
             if(user.get().getRole()==User.ROLE.ADMIN){
-                return "/api/admin";
+                forward(request, response, "/api/admin");
             }
             if(user.get().getRole()==User.ROLE.CLIENT){
-                return "/api/client";
+                forward(request, response, "/api/client");
             }
-            return "/WEB-INF/error.jsp";
+            forward(request, response, "/WEB-INF/error.jsp");
 
         }
         logger.info("Invalid attempt of login user:'"+ email+"'");
-        return "/login.jsp";
+        forward(request, response, "/login.jsp");
     }
 }

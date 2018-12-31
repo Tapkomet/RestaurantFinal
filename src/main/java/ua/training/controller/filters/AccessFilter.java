@@ -4,6 +4,7 @@ import ua.training.model.entity.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AccessFilter implements Filter {
@@ -17,7 +18,8 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
         User user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String loginURI = request.getContextPath() + "/login.jsp";
         String path = request.getRequestURI();
         String roleRequired = "";
         if (path.contains("admin")) roleRequired = "admin";
@@ -27,16 +29,14 @@ public class AccessFilter implements Filter {
                 if (user!=null&&(user.getRole() == User.ROLE.ADMIN)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
-                    servletResponse.getWriter().append("AccessDenied");
-                    return;
+                    response.sendRedirect(loginURI);
                 }
                 break;
             case "client":
                 if (user!=null&&(user.getRole() == User.ROLE.CLIENT || user.getRole() == User.ROLE.ADMIN)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
-                    servletResponse.getWriter().append("AccessDenied");
-                    return;
+                    response.sendRedirect(loginURI);
                 }
                 break;
             default:

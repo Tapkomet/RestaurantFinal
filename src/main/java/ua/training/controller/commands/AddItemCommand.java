@@ -3,7 +3,10 @@ package ua.training.controller.commands;
 import ua.training.model.entity.Item;
 import ua.training.model.service.ItemService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 public class AddItemCommand implements Command {
@@ -14,7 +17,8 @@ public class AddItemCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("item_id"));
         String name = request.getParameter("name");
         int number = Integer.parseInt(request.getParameter("number"));
@@ -26,6 +30,6 @@ public class AddItemCommand implements Command {
         itemService.create(item);
         List<Item> items = itemService.getAllItems();
         request.setAttribute("items" , items);
-        return "/WEB-INF/itemlist.jsp";
+        forward(request, response, "/WEB-INF/itemlist.jsp");
     }
 }
