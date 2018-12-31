@@ -19,7 +19,11 @@ public class AddItemCommand implements Command {
         String name = request.getParameter("name");
         int number = Integer.parseInt(request.getParameter("number"));
         long price = Long.parseLong(request.getParameter("price"));
-        itemService.addItem(id, name, number, price);
+        Item item = new Item.Builder(name)
+                .number(number)
+                .price(price)
+                .build();
+        itemService.create(item);
         List<Item> items = itemService.getAllItems();
         request.setAttribute("items" , items);
         return "/WEB-INF/itemlist.jsp";

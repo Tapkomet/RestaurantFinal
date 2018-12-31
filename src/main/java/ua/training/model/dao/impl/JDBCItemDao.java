@@ -20,17 +20,15 @@ public class JDBCItemDao implements ItemDao {
 
     @Override
     public void create(Item item) throws SQLException {
-        int id = item.getId();
         String name = item.getName();
         int number = item.getNumber();
         long price = item.getPrice();
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into item (item_id, name, number, price)" +
-                        " values (?, ?, ?, ?)");
-        stmt.setInt(1, id);
-        stmt.setString(2, name);
-        stmt.setInt(3, number);
-        stmt.setLong(4, price);
+                "insert into item (name, number, price)" +
+                        " values (?, ?, ?)");
+        stmt.setString(1, name);
+        stmt.setInt(2, number);
+        stmt.setLong(3, price);
         stmt.executeUpdate();
 
         stmt.close();
@@ -103,12 +101,11 @@ public class JDBCItemDao implements ItemDao {
     @Override
     public void addItem(int id, String name, int number, long price) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into item (item_id, name, number, price)" +
-                        " values (?, ?, ?, ?)");
-        stmt.setInt(1, id);
-        stmt.setString(2, name);
-        stmt.setInt(3, number);
-        stmt.setLong(4, price);
+                "insert into item (name, number, price)" +
+                        " values (?, ?, ?)");
+        stmt.setString(1, name);
+        stmt.setInt(2, number);
+        stmt.setLong(3, price);
         stmt.executeUpdate();
 
         stmt.close();

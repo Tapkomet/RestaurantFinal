@@ -63,6 +63,10 @@ public class Item {
             this.id = id;
         }
 
+        public Builder(String name) {
+            this.name = name;
+        }
+
         public Builder itemName(String name) {
             this.name = name;
             return this;
@@ -73,7 +77,7 @@ public class Item {
             return this;
         }
 
-        public Builder isNumber(int number) {
+        public Builder number(int number) {
             this.number = number;
             return this;
         }
