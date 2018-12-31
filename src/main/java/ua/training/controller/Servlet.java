@@ -3,6 +3,7 @@ package ua.training.controller;
 import ua.training.controller.commands.*;
 import ua.training.model.service.ItemService;
 import ua.training.model.service.UserService;
+import ua.training.model.service.CheckService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -34,6 +35,11 @@ public class Servlet extends HttpServlet {
         commands.put("user-register",
                 new RegisterUserCommand(new UserService()));
         commands.put("exception", new ExceptionCommand());
+        commands.put("admin/checks",
+                new CheckListCommand(new CheckService()));
+        commands.put("client/orders",
+                new OrderListCommand(new CheckService()));
+        commands.put("client" , new ClientCommand());
         commands.put("admin" , new AdminCommand());
     }
 

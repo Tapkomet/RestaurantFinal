@@ -6,16 +6,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Admin Base</title>
+    <title>Client Base</title>
 </head>
     <body>
         <a href="${pageContext.request.contextPath}/api/logout">Logout</a>
         <br>
-        <a href="${pageContext.request.contextPath}/api/admin/items">Item List</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/admin/check">Check List</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/client">View as Client</a>
+        <a href="${pageContext.request.contextPath}/api/client/orders">Orders</a>
         <br>
         <a href="${pageContext.request.contextPath}">View Start Page</a>
 

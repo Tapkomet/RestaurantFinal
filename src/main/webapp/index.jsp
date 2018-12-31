@@ -20,6 +20,8 @@
         <br>
         <a href="${pageContext.request.contextPath}/registration.jsp">Registration</a>
         <br>
-        <a href="${pageContext.request.contextPath}/api/admin">Admin</a>
+        <a href="${pageContext.request.contextPath}/api/admin">Admin View</a>
+        <br>
+        <a href="${pageContext.request.contextPath}/api/client">Client View</a>
     </body>
 </html>

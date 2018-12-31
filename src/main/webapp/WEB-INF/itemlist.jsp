@@ -13,9 +13,9 @@
             List Items <br/>
         </h2>
         <table>
-        <tr><th>Name</th><th>Group</th></tr>
+        <tr><th>Id</th><th>Name</th><th>Price</th><th>Number Available</th></tr>
         <c:forEach var="i" items="${items}">
-            <tr><td>${i.id}<c:out value="${i.name}"/></td><td>${i.price}</td>
+            <tr><td>${i.id}<c:out value="${i.name}"/></td><td>${i.price}</td>td>${i.number}</td>
         </c:forEach>
         </table>
         <br>

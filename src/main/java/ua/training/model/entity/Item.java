@@ -10,6 +10,7 @@ public class Item {
     private String name;
     private long price;
     private int number;
+    private Check check;
 
     public static Comparator<Item> ItemIdComparator = (s1, s2) -> {
         int id1 = s1.getId();
@@ -56,6 +57,7 @@ public class Item {
         private String name;
         private long price;
         private int number;
+        private Check check;
 
         public Builder(int id) {
             this.id = id;
@@ -76,6 +78,10 @@ public class Item {
             return this;
         }
 
+        public Builder fromCheck(Check check) {
+            this.check = check;
+            return this;
+        }
 
 
         public Item build() {

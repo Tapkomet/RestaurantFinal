@@ -27,4 +27,12 @@ public class ItemService {
             e.printStackTrace();
         }
     }
+    
+    public void create(Item item){
+        try (ItemDao itemDao = daoFactory.createItemDao()) {
+            itemDao.create(item);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -2,9 +2,7 @@ package ua.training.model.dao.impl;
 
 import ua.training.model.dao.ItemDao;
 import ua.training.model.dao.mapper.ItemMapper;
-import ua.training.model.dao.mapper.UserMapper;
 import ua.training.model.entity.Item;
-import ua.training.model.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
