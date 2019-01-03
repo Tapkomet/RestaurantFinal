@@ -23,5 +23,9 @@
         <a href="${pageContext.request.contextPath}/api/admin">Admin View</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/client">Client View</a>
+
+        <c:if test="${not empty index_message}">
+            <p>${index_message}</p>
+        </c:if>
     </body>
 </html>

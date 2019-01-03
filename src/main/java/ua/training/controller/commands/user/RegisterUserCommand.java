@@ -1,8 +1,7 @@
 package ua.training.controller.commands.user;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Regex;
 import ua.training.model.service.UserService;
 
 import javax.servlet.ServletException;
@@ -13,7 +12,6 @@ import java.io.IOException;
 
 public class RegisterUserCommand implements Command {
 
-    private static final Logger logger = LogManager.getLogger(RegisterUserCommand.class);
     private UserService userService ;
 
     public RegisterUserCommand(UserService userService) {
@@ -21,16 +19,46 @@ public class RegisterUserCommand implements Command {
     }
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
-        if( email == null || email.equals("") || pass == null || pass.equals("")  ){
-            forward(request, response, "/index.jsp");
+        if (surname == null || surname.equals("")) {
+            request.setAttribute("surname_error_message", "Put in the surname");
+            forward(request, response, "/registration.jsp");
+            return;
         }
-        userService.register(surname, email, pass);
-        logger.info("Registration attempt");
+        if (email == null || email.equals("")) {
+            request.setAttribute("email_error_message", "Put in the email");
+            forward(request, response, "/registration.jsp");
+            return;
+        }
+        if(pass == null || pass.equals("")){
+            request.setAttribute("password_error_message", "Put in the password");
+            forward(request, response, "/registration.jsp");
+            return;
+        }
+
+
+        if (!Regex.isEmailCorrect(email)) {
+            request.setAttribute("email_error_message", "Invalid email");
+            forward(request, response, "/registration.jsp");
+            return;
+        }
+        if (!Regex.isSurnameCorrect(surname)) {
+            request.setAttribute("surname_error_message", "Invalid name");
+            forward(request, response, "/registration.jsp");
+            return;
+        }
+        if (!Regex.isPasswordCorrect(pass)) {
+            request.setAttribute("password_error_message", "Invalid password");
+            forward(request, response, "/registration.jsp");
+            return;
+        }
+
+            userService.register(surname, email, pass);
+
+        request.setAttribute("index_message", "Registration successful");
         forward(request, response, "/index.jsp");
     }
 }
