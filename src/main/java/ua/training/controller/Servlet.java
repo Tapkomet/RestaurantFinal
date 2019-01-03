@@ -42,6 +42,10 @@ public class Servlet extends HttpServlet {
         commands.put("user-register",
                 new RegisterUserCommand(new UserService()));
         commands.put("exception", new ExceptionCommand());
+        commands.put("client/order",
+                new OrderCommand(new CheckService()));
+        commands.put("admin/check",
+                new CheckCommand(new CheckService()));
         commands.put("admin/checks",
                 new CheckListCommand(new CheckService()));
         commands.put("client/orders",

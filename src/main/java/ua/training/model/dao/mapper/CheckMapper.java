@@ -4,6 +4,7 @@ import ua.training.model.entity.Check;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class CheckMapper implements ObjectMapper<Check> {

@@ -2,6 +2,7 @@ package ua.training.model.dao.impl;
 
 import ua.training.model.dao.CheckDao;
 import ua.training.model.dao.mapper.CheckMapper;
+import ua.training.model.dao.mapper.ItemMapper;
 import ua.training.model.entity.Check;
 import ua.training.model.entity.Item;
 
@@ -55,13 +56,25 @@ public class JDBCCheckDao implements CheckDao {
     @Override
     public Check findById(int id) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "select * from check where check_id = (?)");
+                "select * from check" +
+                        " left join item_in_check on cheque.check_id = item_in_check.check_id" +
+                        " where check.check_id = (?) ");
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         CheckMapper checkMapper = new CheckMapper();
 
         rs.next();
         Check check = checkMapper.extractFromResultSet(rs);
+
+        List<Item> items = new ArrayList<>();
+        ItemMapper itemMapper = new ItemMapper();
+        do {
+            Item item = itemMapper
+                    .extractFromResultSetForCheck(rs);
+            items.add(item);
+        }
+        while(rs.next());
+        check.setItems(items);
 
         stmt.close();
         connection.close();
