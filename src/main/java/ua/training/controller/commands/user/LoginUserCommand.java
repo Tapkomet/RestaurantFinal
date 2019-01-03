@@ -1,6 +1,7 @@
 package ua.training.controller.commands.user;
 
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Path;
 import ua.training.controller.util.Regex;
 import ua.training.model.entity.User;
 import ua.training.model.service.UserService;
@@ -29,34 +30,34 @@ public class LoginUserCommand implements Command {
         String pass = request.getParameter("pass");
         if (email == null || email.equals("")) {
             request.setAttribute("email_error_message", "Put in the email");
-            forward(request, response, "/login.jsp");
+            forward(request, response, Path.LOGIN);
             return;
         }
         if(pass == null || pass.equals("")){
             request.setAttribute("password_error_message", "Put in the password");
-            forward(request, response, "/login.jsp");
+            forward(request, response, Path.LOGIN);
             return;
         }
         if (!Regex.isPasswordCorrect(pass)) {
             request.setAttribute("password_error_message", "Invalid password");
-            forward(request, response, "/login.jsp");
+            forward(request, response, Path.LOGIN);
             return;
         }
         if (!Regex.isEmailCorrect(email)) {
             request.setAttribute("email_error_message", "Invalid email");
-            forward(request, response, "/login.jsp");
+            forward(request, response, Path.LOGIN);
             return;
         }
 
         if (CommandUtility.checkUserIsLogged(request, email)) {
-            forward(request, response, "/api/exception");
+            forward(request, response, Path.EXCEPTION);
             return;
         }
         try {
             Optional<User> user = userService.login(email, pass);
             CommandUtility.setUser(request, user.get());
             if (user.get().getRole() == User.ROLE.ADMIN) {
-                redirect(request, response, "/api/admin");
+                redirect(request, response, Path.ADMIN);
                 return;
 
             }
@@ -64,7 +65,7 @@ public class LoginUserCommand implements Command {
                 redirect(request, response, "/api/client");
                 return;
             }
-            forward(request, response, "/api/exception");
+            forward(request, response, Path.EXCEPTION);
             return;
         } catch (WrongEmailException e) {
             request.setAttribute("email_error_message", "Wrong email");
@@ -73,6 +74,6 @@ public class LoginUserCommand implements Command {
         } catch (LoginException e) {
             request.setAttribute("login_error_message", "Login failed");
         }
-        forward(request, response, "/login.jsp");
+        forward(request, response, Path.LOGIN);
     }
 }

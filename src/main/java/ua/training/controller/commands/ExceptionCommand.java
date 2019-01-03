@@ -1,5 +1,7 @@
 package ua.training.controller.commands;
 
+import ua.training.controller.util.Path;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +25,6 @@ public class ExceptionCommand implements Command {
             default: request.setAttribute("message", "An error has occurred");
         }
 
-        forward(request, response, "/WEB-INF/error.jsp");
+        forward(request, response, Path.ERROR);
     }
 }

@@ -1,6 +1,7 @@
 package ua.training.controller.commands.item;
 
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Path;
 import ua.training.model.entity.Item;
 import ua.training.model.service.ItemService;
 
@@ -22,6 +23,6 @@ public class ItemCommand implements Command {
         int id = Integer.parseInt(sid);
         Item item = itemService.getItemById(id);
         request.setAttribute("item" , item);
-        forward(request, response, "/WEB-INF/item.jsp");
+        forward(request, response, Path.ITEM);
     }
 }

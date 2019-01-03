@@ -1,6 +1,7 @@
 package ua.training.controller.commands.item;
 
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Path;
 import ua.training.model.entity.Item;
 import ua.training.model.service.ItemService;
 
@@ -30,6 +31,6 @@ public class AddItemCommand implements Command {
                 .price(price)
                 .build();
         itemService.create(item);
-        response.sendRedirect(request.getContextPath() + "/api/admin/items");
+        response.sendRedirect(request.getContextPath() + Path.ADMIN_ITEMS);
     }
 }

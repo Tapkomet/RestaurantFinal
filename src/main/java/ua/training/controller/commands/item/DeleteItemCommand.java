@@ -1,5 +1,6 @@
 package ua.training.controller.commands.item;
 
+import ua.training.controller.util.Path;
 import ua.training.model.service.ItemService;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,6 @@ public class DeleteItemCommand implements ua.training.controller.commands.Comman
         String sid = request.getParameter("item_id");
         int id = Integer.parseInt(sid);
         itemService.delete(id);
-        response.sendRedirect(request.getContextPath() + "/api/admin/items");
+        response.sendRedirect(request.getContextPath() + Path.ADMIN_ITEMS);
     }
 }

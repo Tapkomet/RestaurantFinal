@@ -1,6 +1,7 @@
 package ua.training.controller.commands.item;
 
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Path;
 import ua.training.model.entity.Item;
 import ua.training.model.service.ItemService;
 
@@ -22,6 +23,6 @@ public class ItemListCommand implements Command {
             throws ServletException, IOException {
         List<Item> items = itemService.getAllItems();
         request.setAttribute("items" , items);
-        forward(request, response, "/WEB-INF/itemlist.jsp");
+        forward(request, response, Path.ITEM_LIST);
     }
 }

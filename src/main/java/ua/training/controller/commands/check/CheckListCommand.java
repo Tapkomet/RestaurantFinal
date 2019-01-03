@@ -1,6 +1,7 @@
 package ua.training.controller.commands.check;
 
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Path;
 import ua.training.model.entity.Check;
 import ua.training.model.service.CheckService;
 
@@ -22,6 +23,6 @@ public class CheckListCommand implements Command {
             throws ServletException, IOException {
         List<Check> checks = checkService.getAllChecks();
         request.setAttribute("checks" , checks);
-        forward(request, response, "/WEB-INF/checklist.jsp");
+        forward(request, response, Path.CHECK_LIST);
     }
 }
