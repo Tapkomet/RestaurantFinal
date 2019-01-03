@@ -21,6 +21,8 @@
         <br>
         <a href="${pageContext.request.contextPath}/api/admin/checks">View all checks</a>
         <br>
+        <a href="${pageContext.request.contextPath}/api/client/orders">View all your orders</a>
+        <br>
         <a href="${pageContext.request.contextPath}/api/admin/users">View users</a>
 
     </body>
