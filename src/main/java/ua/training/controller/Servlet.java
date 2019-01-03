@@ -1,6 +1,11 @@
 package ua.training.controller;
 
 import ua.training.controller.commands.*;
+import ua.training.controller.commands.check.CheckListCommand;
+import ua.training.controller.commands.check.OrderListCommand;
+import ua.training.controller.commands.item.AddItemCommand;
+import ua.training.controller.commands.item.ItemListCommand;
+import ua.training.controller.commands.user.*;
 import ua.training.model.service.ItemService;
 import ua.training.model.service.UserService;
 import ua.training.model.service.CheckService;

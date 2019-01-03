@@ -1,5 +1,6 @@
-package ua.training.controller.commands;
+package ua.training.controller.commands.item;
 
+import ua.training.controller.commands.Command;
 import ua.training.model.entity.Item;
 import ua.training.model.service.ItemService;
 
