@@ -8,11 +8,21 @@ import ua.training.model.service.exception.WrongEmailException;
 import ua.training.model.service.exception.WrongPasswordException;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 public class UserService {
 
     DaoFactory daoFactory = DaoFactory.getInstance();
+
+    public List<User> getAllUsers() {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public Optional<User> login(String email, String pass) throws LoginException {
         Optional<User> result;
@@ -28,13 +38,16 @@ public class UserService {
         throw new WrongEmailException("User with email " + email + " is not found.");
     }
 
-    public void register(String surname, String email, String pass){
+    public void register(String surname, String email, String pass) throws SQLException {
         UserDao userDao = daoFactory.createUserDao();
-        try {
-            userDao.register(surname, email, pass);
+        userDao.register(surname, email, pass);
+    }
+
+    public void update(User user) {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            userDao.update(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

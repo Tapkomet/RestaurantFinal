@@ -37,7 +37,6 @@ public class JDBCUserDao implements UserDao {
     }
 
 
-
     @Override
     public List<User> findAll() throws SQLException {
         Map<Integer, User> users = new HashMap<>();
@@ -59,8 +58,18 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void update(User entity) {
+    public void update(User user) throws SQLException {
+        int id = user.getId();
+        String role = user.getRole().toString();
+        PreparedStatement stmt = connection.prepareStatement(
+                "update user set role = ?" +
+                        " where user_id = ?");
+        stmt.setInt(2, id);
+        stmt.setString(1, role);
+        stmt.executeUpdate();
 
+        stmt.close();
+        connection.close();
     }
 
     @Override
@@ -76,7 +85,7 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void close()  {
+    public void close() {
         try {
             connection.close();
         } catch (SQLException e) {
@@ -87,15 +96,15 @@ public class JDBCUserDao implements UserDao {
     @Override
     public Optional<User> findByEmail(String email) {
         Optional<User> result = Optional.empty();
-        try(PreparedStatement ps = connection.prepareCall("SELECT * FROM user WHERE email = ?")){
-            ps.setString( 1, email);
+        try (PreparedStatement ps = connection.prepareCall("SELECT * FROM user WHERE email = ?")) {
+            ps.setString(1, email);
             ResultSet rs;
             rs = ps.executeQuery();
             UserMapper mapper = new UserMapper();
-            if (rs.next()){
+            if (rs.next()) {
                 result = Optional.of(mapper.extractFromResultSet(rs));
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
         return result;
