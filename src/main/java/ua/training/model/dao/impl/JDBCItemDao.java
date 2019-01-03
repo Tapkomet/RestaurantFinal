@@ -20,15 +20,17 @@ public class JDBCItemDao implements ItemDao {
 
     @Override
     public void create(Item item) throws SQLException {
+        int id = item.getId();
         String name = item.getName();
         int number = item.getNumber();
         long price = item.getPrice();
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into item (name, number, price)" +
+                "insert into item (item_id, name, number, price)" +
                         " values (?, ?, ?)");
-        stmt.setString(1, name);
-        stmt.setInt(2, number);
-        stmt.setLong(3, price);
+        stmt.setInt(1, id);
+        stmt.setString(2, name);
+        stmt.setInt(3, number);
+        stmt.setLong(4, price);
         stmt.executeUpdate();
 
         stmt.close();
@@ -74,8 +76,20 @@ public class JDBCItemDao implements ItemDao {
 
 
     @Override
-    public void update(Item item) {
+    public void update(Item item) throws SQLException {
+        int id = item.getId();
+        int number = item.getNumber();
+        long price = item.getPrice();
+        PreparedStatement stmt = connection.prepareStatement(
+                "update item set number = ?, price = ?" +
+                        " where item_id = ?");
+        stmt.setInt(3, id);
+        stmt.setInt(1, number);
+        stmt.setLong(2, price);
+        stmt.executeUpdate();
 
+        stmt.close();
+        connection.close();
     }
 
     @Override
@@ -83,7 +97,7 @@ public class JDBCItemDao implements ItemDao {
         PreparedStatement stmt = connection.prepareStatement(
                 "delete from item where item_id = (?)");
         stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
+        stmt.executeUpdate();
 
         stmt.close();
         connection.close();
@@ -101,11 +115,12 @@ public class JDBCItemDao implements ItemDao {
     @Override
     public void addItem(int id, String name, int number, long price) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into item (name, number, price)" +
-                        " values (?, ?, ?)");
-        stmt.setString(1, name);
-        stmt.setInt(2, number);
-        stmt.setLong(3, price);
+                "insert into item (item_id, name, number, price)" +
+                        " values (?, ?, ?, ?)");
+        stmt.setInt(1, id);
+        stmt.setString(2, name);
+        stmt.setInt(3, number);
+        stmt.setLong(4, price);
         stmt.executeUpdate();
 
         stmt.close();

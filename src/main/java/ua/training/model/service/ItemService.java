@@ -13,7 +13,18 @@ public class ItemService {
 
     public List<Item> getAllItems(){
         try (ItemDao itemDao = daoFactory.createItemDao()) {
-            return itemDao.findAll();
+            try {
+                return itemDao.findAll();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+    public Item getItemById(int id){
+        try (ItemDao dao = daoFactory.createItemDao()) {
+            return dao.findById(id);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -27,10 +38,26 @@ public class ItemService {
             e.printStackTrace();
         }
     }
-    
+
     public void create(Item item){
         try (ItemDao itemDao = daoFactory.createItemDao()) {
             itemDao.create(item);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Item item){
+        try (ItemDao itemDao = daoFactory.createItemDao()) {
+            itemDao.update(item);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int id){
+        try (ItemDao itemDao = daoFactory.createItemDao()) {
+            itemDao.delete(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

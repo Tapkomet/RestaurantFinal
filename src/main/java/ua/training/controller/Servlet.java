@@ -1,10 +1,8 @@
 package ua.training.controller;
 
 import ua.training.controller.commands.*;
-import ua.training.controller.commands.check.CheckListCommand;
-import ua.training.controller.commands.check.OrderListCommand;
-import ua.training.controller.commands.item.AddItemCommand;
-import ua.training.controller.commands.item.ItemListCommand;
+import ua.training.controller.commands.check.*;
+import ua.training.controller.commands.item.*;
 import ua.training.controller.commands.user.*;
 import ua.training.model.service.ItemService;
 import ua.training.model.service.UserService;
@@ -33,6 +31,10 @@ public class Servlet extends HttpServlet {
                 new ItemListCommand(new ItemService()));
         commands.put("admin/addItem",
                 new AddItemCommand(new ItemService()));
+        commands.put("admin/editItem",
+                new EditItemCommand(new ItemService()));
+        commands.put("admin/deleteItem",
+                new DeleteItemCommand(new ItemService()));
         commands.put("user-login",
                 new LoginUserCommand(new UserService()));
         commands.put("logout",
