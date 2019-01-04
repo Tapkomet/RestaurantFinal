@@ -20,7 +20,7 @@ public class ItemListCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String sortBy = request.getParameter("toSort");
+        String sortBy = request.getParameter("tosort");
         if (sortBy == null) {
             getAllItems(request, response);
         } else {
@@ -31,7 +31,7 @@ public class ItemListCommand implements Command {
     }
 
 
-    void getAllItems(HttpServletRequest request, HttpServletResponse response)
+    private void getAllItems(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Item> items = itemService.getAllItems();
         request.setAttribute("items", items);

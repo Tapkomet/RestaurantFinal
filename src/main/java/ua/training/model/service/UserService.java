@@ -38,9 +38,13 @@ public class UserService {
         throw new WrongEmailException("User with email " + email + " is not found.");
     }
 
-    public void register(String surname, String email, String pass) throws SQLException {
-        UserDao userDao = daoFactory.createUserDao();
-        userDao.register(surname, email, pass);
+    public void register(String surname, String email, String pass) {
+        try {
+            UserDao userDao = daoFactory.createUserDao();
+            userDao.register(surname, email, pass);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void update(User user) {

@@ -7,33 +7,76 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Item List</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
     <body>
         <h2>
             List Items <br/>
         </h2>
+        <c:if test="${not empty sql_error_message}">
+            <p class="error">${sql_error_message}</p>
+        </c:if>
         <table>
-        <tr><th>Id</th><th>Name</th><th>Price</th><th>Number Available</th></tr>
+        <tr><th>Id</th><th>Name</th><th>Price</th>
+        <th>Total number</th><th></th></tr>
         <c:forEach var="i" items="${items}">
-            <tr><td>${i.id}<c:out value="${i.name}"/></td><td>${i.price}</td>td>${i.number}</td>
+            <tr><td><a href="item?id=<c:out value='${i.id}' />"> <c:out value="${i.id}"/></a></td>
+            <td>${i.name}</td><td>${i.price}</td>
+            <td>${i.number}</td>
+            <td>
+            <form action="${pageContext.request.contextPath}/api/admin/deleteItem?id=${i.id}"
+             method="post">
+            <input type="submit" value="Delete"/>
+            </form>
+            </td>
         </c:forEach>
         </table>
+
+        <form action="${pageContext.request.contextPath}/api/admin/items" method="post">
+        	<c:if test="${page > 1}">
+        	    <button type="submit" class="btn btn-default" name="nextPage" value='previous'>
+                    Previous
+        	    </button>
+        	</c:if>
+        	<c:if test="${page < lastPage}">
+                <button type="submit" class="btn btn-default" name="nextPage" value='next'>
+        	            Next
+        	    </button>
+        	</c:if>
+        	<input type="hidden" name = "page" value="${page}">
+        	<input type="hidden" name = "tosort" value="${tosort}">
+        </form>
+
+        <br>
         <form action="${pageContext.request.contextPath}/api/admin/items" method="get">
         Sort by: <br>
-        <input type="radio" name="toSort" value="id" checked>Id<br>
-        <input type="radio" name="toSort" value="name">Name<br>
-        <input type="radio" name="toSort" value="price">Price<br>
+        <input type="radio" name="tosort" value="id"
+         <c:if test="${tosort eq 'id'}">checked</c:if>>Id<br>
+        <input type="radio" name="tosort" value="name"
+         <c:if test="${tosort eq 'name'}">checked</c:if>>Name<br>
+        <input type="radio" name="tosort" value="price"
+         <c:if test="${tosort eq 'price'}">checked</c:if>>Price<br>
         <input type="submit" value="Sort"/>
         </form>
         <br>
-        <br>
-        <%=request.getAttribute("items")%>
-        <br>
         <form action="${pageContext.request.contextPath}/api/admin/addItem" method="post">
-             ItemId <input type="number" name="item_id"/><br>
+             Id <input type="number" name="id"/><br>
+             <c:if test="${not empty id_error_message}">
+                <p class="error">${id_error_message}</p>
+             </c:if>
              Name <input type="text" name="name"/><br>
+             <c:if test="${not empty name_error_message}">
+                <p class="error">${name_error_message}</p>
+             </c:if>
              Number in stock <input type="number" name="number"/><br>
-             Price <input type="number" name="price"/><br>
+             <c:if test="${not empty number_error_message}">
+                <p class="error">${number_error_message}</p>
+             </c:if>
+             Price per unit or kilo <input type="number" name="price"/><br>
+             <c:if test="${not empty price_error_message}">
+                <p class="error">${price_error_message}</p>
+             </c:if>
              <input type="submit"/>
         </form>
 

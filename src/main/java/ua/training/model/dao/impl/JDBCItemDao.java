@@ -74,7 +74,6 @@ public class JDBCItemDao implements ItemDao {
     }
 
 
-
     @Override
     public void update(Item item) throws SQLException {
         int id = item.getId();
@@ -104,12 +103,23 @@ public class JDBCItemDao implements ItemDao {
     }
 
     @Override
-    public void close()  {
+    public void close() {
         try {
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public int getCount() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement
+                ("select count(*) as count from item");
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("count");
+        }
+        return 0;
     }
 
     @Override
@@ -146,5 +156,40 @@ public class JDBCItemDao implements ItemDao {
                     .makeUnique(items, item);
         }
         return new ArrayList<>(items.values());
+    }
+
+    @Override
+    public List<Item> findNumberSorted(String sortBy, int integer, int offset) throws SQLException {
+        PreparedStatement stmt = null;
+        switch (sortBy) {
+            case "id":
+                stmt = connection.prepareStatement
+                        (" select * from item order by id+0 limit ? offset ?");
+                break;
+            case "name":
+                stmt = connection.prepareStatement
+                        (" select * from item order by name limit ? offset ?");
+                break;
+            case "price":
+                stmt = connection.prepareStatement
+                        (" select * from item order by price+0 limit ? offset ?");
+                break;
+            default:
+                break;
+        }
+        stmt.setInt(1, integer);
+        stmt.setInt(2, offset);
+
+        ResultSet rs = stmt.executeQuery();
+
+        List<Item> items = new ArrayList<>();
+        ItemMapper itemMapper = new ItemMapper();
+
+        while (rs.next()) {
+            Item item = itemMapper
+                    .extractFromResultSet(rs);
+            items.add(item);
+        }
+        return items;
     }
 }

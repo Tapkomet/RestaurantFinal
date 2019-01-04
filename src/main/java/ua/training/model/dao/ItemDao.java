@@ -9,4 +9,6 @@ public interface ItemDao extends GenericDao<Item> {
     void addItem(int id, String name, int number, long price) throws SQLException;
 
     List<Item> findAllSorted(String sortBy) throws SQLException;
+
+    List<Item> findNumberSorted(String sortBy, int integer, int offse) throws SQLException;
 }

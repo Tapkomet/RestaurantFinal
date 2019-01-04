@@ -126,4 +126,9 @@ public class JDBCCheckDao implements CheckDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public int getCount() throws SQLException {
+        return 0;
+    }
 }
