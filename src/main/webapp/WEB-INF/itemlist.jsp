@@ -18,6 +18,13 @@
             <tr><td>${i.id}<c:out value="${i.name}"/></td><td>${i.price}</td>td>${i.number}</td>
         </c:forEach>
         </table>
+        <form action="${pageContext.request.contextPath}/api/admin/items" method="get">
+        Sort by: <br>
+        <input type="radio" name="toSort" value="id" checked>Id<br>
+        <input type="radio" name="toSort" value="name">Name<br>
+        <input type="radio" name="toSort" value="price">Price<br>
+        <input type="submit" value="Sort"/>
+        </form>
         <br>
         <br>
         <%=request.getAttribute("items")%>

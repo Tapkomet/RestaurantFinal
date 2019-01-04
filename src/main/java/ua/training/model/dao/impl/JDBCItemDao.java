@@ -126,4 +126,25 @@ public class JDBCItemDao implements ItemDao {
         stmt.close();
         connection.close();
     }
+
+    @Override
+    public List<Item> findAllSorted(String sortBy) throws SQLException {
+        Map<Integer, Item> items = new HashMap<>();
+
+        PreparedStatement stmt = connection.prepareStatement(" select * from item ORDER BY ?");
+        stmt.setString(1, sortBy);
+        ResultSet rs = stmt.executeQuery();
+        System.out.println(sortBy);
+
+        ItemMapper itemMapper = new ItemMapper();
+
+        while (rs.next()) {
+            Item item = itemMapper
+                    .extractFromResultSet(rs);
+            System.out.println(item);
+            itemMapper
+                    .makeUnique(items, item);
+        }
+        return new ArrayList<>(items.values());
+    }
 }

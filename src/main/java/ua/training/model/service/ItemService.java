@@ -62,4 +62,27 @@ public class ItemService {
             e.printStackTrace();
         }
     }
+
+    public List<Item> getItemsSortedBy(String sortBy) {
+        try (ItemDao itemDao = daoFactory.createItemDao()) {
+            List<Item> items = itemDao.findAll();
+            switch (sortBy) {
+                case "id":
+                    items.sort(Item.ItemIdComparator);
+                    break;
+                case "name":
+                    items.sort(Item.ItemNameComparator);
+                    break;
+                case "price":
+                    items.sort(Item.ItemPriceComparator);
+                    break;
+                default:
+                    break;
+            }
+            return items;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

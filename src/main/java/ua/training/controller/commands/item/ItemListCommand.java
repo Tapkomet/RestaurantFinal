@@ -19,10 +19,22 @@ public class ItemListCommand implements Command {
     }
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response)
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String sortBy = request.getParameter("toSort");
+        if (sortBy == null) {
+            getAllItems(request, response);
+        } else {
+            List<Item> items = itemService.getItemsSortedBy(sortBy);
+            request.setAttribute("items", items);
+            forward(request, response, Path.ITEM_LIST);
+        }
+    }
+
+
+    void getAllItems(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Item> items = itemService.getAllItems();
-        request.setAttribute("items" , items);
+        request.setAttribute("items", items);
         forward(request, response, Path.ITEM_LIST);
     }
 }
