@@ -21,7 +21,7 @@ public class AddItemCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("item_id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         int number = Integer.parseInt(request.getParameter("number"));
         long price = Long.parseLong(request.getParameter("price"));

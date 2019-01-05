@@ -4,8 +4,8 @@ public interface Path {
     String ADMIN_USERS = "/api/admin/users";
     String ADMIN_EDIT_USER = "/api/admin/users/edit";
     String CLIENT = "/api/client";
-    String CLIENT_CHECKS = "/api/client/orders";
-    String CLIENT_CHECKS_ADD = "/api/client/orders/add";
+    String CLIENT_ORDERS = "/api/client/orders";
+    String CLIENT_ORDERS_ADD = "/api/client/orders/add";
     String ADMIN_ITEMS = "/api/admin/items";
     String ADMIN_ITEM = "/api/admin/item";
     String ADMIN_ADD_ITEM = "/api/admin/addItem";
@@ -21,7 +21,7 @@ public interface Path {
     String CHECK_LIST = "/WEB-INF/checklist.jsp";
     String ERROR = "/WEB-INF/error.jsp";
     String ITEM_LIST = "/WEB-INF/itemlist.jsp";
-    String CLIENT_ITEM_LIST = "/WEB-INF/orderlist.jsp";
+    String CLIENT_ITEM_LIST = "/WEB-INF/clientitemlist.jsp";
     String USER_LIST = "/WEB-INF/userlist.jsp";
     String ITEM = "/WEB-INF/item.jsp";
     String CHECK = "/WEB-INF/check.jsp";

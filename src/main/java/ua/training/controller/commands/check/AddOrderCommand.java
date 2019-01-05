@@ -42,7 +42,7 @@ public class AddOrderCommand implements ua.training.controller.commands.Command 
             id = Integer.parseInt(request.getParameter("id" + i));
             name = request.getParameter("name" + i);
             price = (long) Double.parseDouble(request.getParameter("priceToAdd" + i));
-            number = Integer.parseInt(request.getParameter("number" + i));
+            number = Integer.parseInt(request.getParameter("numberToAdd" + i));
             totalPrice += price;
 
             Item item = new Item.Builder(id)
@@ -63,6 +63,6 @@ public class AddOrderCommand implements ua.training.controller.commands.Command 
         check.setId(check.hashCode());
 
         checkService.create(check);
-        redirect(request, response, Path.CLIENT_CHECKS);
+        redirect(request, response, Path.CLIENT_ORDERS);
     }
 }

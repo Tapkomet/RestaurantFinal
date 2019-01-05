@@ -28,13 +28,14 @@ public class JDBCCheckDao implements CheckDao {
         Timestamp createTime = check.getCreateTime();
         connection.setAutoCommit(false);
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into check (check_id, total_price, client_id, create_time)" +
+                "insert into cheque (check_id, total_price, client_id, create_time)" +
                         " values (?, ?, ?, ?)");
         stmt.setInt(1, id);
         stmt.setLong(2, totalPrice);
         stmt.setInt(3, clientId);
         stmt.setTimestamp(4, createTime);
         stmt.addBatch();
+        stmt.executeBatch();
         stmt = connection.prepareStatement(
                 "insert into item_in_check (item_id, name, price, number, check_id)" +
                         " values (?, ?, ?, ?, ?)");
@@ -56,9 +57,9 @@ public class JDBCCheckDao implements CheckDao {
     @Override
     public Check findById(int id) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "select * from check" +
+                "select * from cheque" +
                         " left join item_in_check on cheque.check_id = item_in_check.check_id" +
-                        " where check.check_id = (?) ");
+                        " where cheque.check_id = (?) ");
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         CheckMapper checkMapper = new CheckMapper();
@@ -86,7 +87,7 @@ public class JDBCCheckDao implements CheckDao {
         Map<Integer, Check> checks = new HashMap<>();
 
         final String query = "" +
-                " select * from check";
+                "select * from cheque";
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(query);
 
@@ -110,7 +111,7 @@ public class JDBCCheckDao implements CheckDao {
     @Override
     public void delete(int id) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "delete from check where check_id = (?)");
+                "delete from cheque where check_id = (?)");
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
 

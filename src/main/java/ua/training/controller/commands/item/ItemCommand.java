@@ -19,7 +19,7 @@ public class ItemCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String sid = request.getParameter("item_id");
+        String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
         Item item = itemService.getItemById(id);
         request.setAttribute("item" , item);

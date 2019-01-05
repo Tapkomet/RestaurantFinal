@@ -20,8 +20,7 @@
         </c:forEach>
         </table>
         <br>
-        <br>
-
+        <a href="${pageContext.request.contextPath}/api/client/orders/addPage">Make a new order</a>
         <br/>
         <a href="${pageContext.request.contextPath}/index.jsp">index</a>
     </body>

@@ -73,7 +73,7 @@
              <c:if test="${not empty number_error_message}">
                 <p class="error">${number_error_message}</p>
              </c:if>
-             Price per unit or kilo <input type="number" name="price"/><br>
+             Price per unit<input type="number" name="price"/><br>
              <c:if test="${not empty price_error_message}">
                 <p class="error">${price_error_message}</p>
              </c:if>

@@ -17,7 +17,7 @@ public class DeleteItemCommand implements ua.training.controller.commands.Comman
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String sid = request.getParameter("item_id");
+        String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
         itemService.delete(id);
         response.sendRedirect(request.getContextPath() + Path.ADMIN_ITEMS);

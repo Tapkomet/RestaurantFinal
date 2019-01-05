@@ -30,6 +30,7 @@ public class OrderAddPageCommand implements ua.training.controller.commands.Comm
     }
 
     void getAllItems(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Requesting all items");
         List<Item> items = itemService.getAllItems();
         request.setAttribute("items", items);
         forward(request, response, Path.CLIENT_ITEM_LIST);

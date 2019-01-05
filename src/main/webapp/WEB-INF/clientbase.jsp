@@ -11,8 +11,6 @@
     <body>
         <a href="${pageContext.request.contextPath}/api/logout">Logout</a>
         <br>
-        <a href="${pageContext.request.contextPath}/api/client/orders">Orders</a>
-        <br>
         <a href="${pageContext.request.contextPath}">View Start Page</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/client/orders">View all your orders</a>

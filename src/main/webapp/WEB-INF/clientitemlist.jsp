@@ -12,7 +12,7 @@
         <script>
          $(window).on('load', function () {
          var itemsNumber = 1;
-            $('#prodtable').on('click','.addbutton',function(){
+            $('#itemtable').on('click','.addbutton',function(){
                  var self = $(this).closest("tr");
                  var id = self.find(".id").text();
                  var name = self.find(".name").text();
@@ -41,10 +41,10 @@
             List Items <br/>
         </h2>
         <button id="btn1">Append text</button>
-        <table id="prodtable">
-        <tr><th>Id</th><th>Name</th><th>Price</th><th>IsSoldByWeight</th>
-        <th>Total number</th><th>Total weight</th><th>Manager</th>
-        <th>Number to add</th><th>Weight to add</th><th></th></tr>
+        <table id="itemtable">
+        <tr><th>Id</th><th>Name</th><th>Price</th>
+        <th>Total number</th>
+        <th>Number to add</th><th></th></tr>
         <c:forEach var="i" items="${items}">
             <tr><td class="id"><a href="item?id=<c:out value='${i.id}'/>"><c:out value="${i.id}"/></a></td>
             <td class="name">${i.name}</td><td class="price">${i.price}</td>
@@ -56,8 +56,8 @@
         </table>
         <br>
         <p>Add check:</p> <br>
-        <form class="addToCheck" action="${pageContext.request.contextPath}/api/cashier/checks/add" method="post">
-            <input type="submit" value="Close check"/>
+        <form class="addToCheck" action="${pageContext.request.contextPath}/api/client/orders/add" method="post">
+            <input type="submit" value="Make order"/>
         </form>
         <br>
 

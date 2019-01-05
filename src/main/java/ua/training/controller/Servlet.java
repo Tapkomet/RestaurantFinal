@@ -30,6 +30,8 @@ public class Servlet extends HttpServlet {
                 .setAttribute("loggedUsers", new HashSet<String>());
         commands.put("admin/items",
                 new ItemListCommand(new ItemService()));
+        commands.put("admin/item",
+                new ItemCommand(new ItemService()));
         commands.put("admin/addItem",
                 new AddItemCommand(new ItemService()));
         commands.put("admin/editItem",
@@ -43,20 +45,20 @@ public class Servlet extends HttpServlet {
         commands.put("user-register",
                 new RegisterUserCommand(new UserService()));
         commands.put("exception", new ExceptionCommand());
-        commands.put("client/order",
-                new OrderCommand(new CheckService()));
-        commands.put("admin/check",
-                new CheckCommand(new CheckService()));
         commands.put("admin/checks",
                 new CheckListCommand(new CheckService()));
-        commands.put("client/orders",
-                new OrderListCommand(new CheckService()));
+        commands.put("admin/check",
+                new CheckCommand(new CheckService()));
         commands.put("client/orders/addPage",
                 new OrderAddPageCommand(new ItemService()));
         commands.put("client/orders/add",
                 new AddOrderCommand(new CheckService()));
-        commands.put("admin/users", new UserListCommand(new UserService()));
+        commands.put("client/orders",
+                new OrderListCommand(new CheckService()));
+        commands.put("client/order",
+                new OrderCommand(new CheckService()));
         commands.put("admin/users/edit", new EditUserCommand(new UserService()));
+        commands.put("admin/users", new UserListCommand(new UserService()));
         commands.put("client", new ClientCommand());
         commands.put("admin", new AdminCommand());
     }
