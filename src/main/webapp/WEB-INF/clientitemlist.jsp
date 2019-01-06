@@ -19,6 +19,7 @@
                  var price = self.find(".price").text();
                  var number = self.find(".number").text();
                  var numberToAdd = self.find(".numberInput").find("input").val();
+                 var category = self.find(".category").text();
                  var itemToAdd = "";
                  itemToAdd += "Id: "+id+" <input type='hidden' name='id"+itemsNumber+
                  "' value='"+id+"'/>"
@@ -30,6 +31,8 @@
                  "' value='"+numberToAdd+"'/>"
                  itemToAdd += "Total price: "+priceToAdd+" <input type='hidden' name='priceToAdd"+itemsNumber+
                  "' value='"+priceToAdd+"'/>"
+                 itemToAdd += "Category: "+category+" <input type='hidden' name='category"+itemsNumber+
+                 "' value='"+category+"'/>"
                  $(".addToCheck").prepend(itemToAdd);
                  itemsNumber++;
              });
@@ -44,11 +47,12 @@
         <table id="itemtable">
         <tr><th>Id</th><th>Name</th><th>Price</th>
         <th>Total number</th>
-        <th>Number to add</th><th></th></tr>
+        <th>Number to add</th>
+        <th>Category</th><th></th></tr>
         <c:forEach var="i" items="${items}">
             <tr><td class="id"><a href="item?id=<c:out value='${i.id}'/>"><c:out value="${i.id}"/></a></td>
             <td class="name">${i.name}</td><td class="price">${i.price}</td>
-            <td class="numberInput"><input type="number"></td>
+            <td class="numberInput"><input type="number"></td><td class="category">${i.category}</td>
             <td>
             <button class="addbutton" id="btn1">Add to check</button>
             </td>

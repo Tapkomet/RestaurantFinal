@@ -17,6 +17,7 @@ public class ItemMapper implements ObjectMapper<Item> {
         item.setName(rs.getString("name"));
         item.setPrice(rs.getLong("price"));
         item.setNumber(rs.getInt("number"));
+        item.setCategory(rs.getString("category"));
         return item;
     }
 
@@ -30,6 +31,7 @@ public class ItemMapper implements ObjectMapper<Item> {
         Check check = new Check();
         check.setId(rs.getInt("check_id"));
         item.setCheck(check);
+        item.setCategory(rs.getString("category"));
         return item;
     }
 

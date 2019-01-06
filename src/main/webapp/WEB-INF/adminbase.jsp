@@ -17,7 +17,7 @@
         <br>
         <a href="${pageContext.request.contextPath}/api/client">View as Client</a>
         <br>
-        <a href="${pageContext.request.contextPath}">View Start Page</a>
+        <a href="${pageContext.request.contextPath}/index.jsp">View Start Page</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/admin/checks">View all checks</a>
         <br>

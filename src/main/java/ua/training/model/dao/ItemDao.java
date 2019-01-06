@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ItemDao extends GenericDao<Item> {
-    void addItem(int id, String name, int number, long price) throws SQLException;
+    void addItem(int id, String name, int number, long price, String category) throws SQLException;
 
     List<Item> findAllSorted(String sortBy) throws SQLException;
 
-    List<Item> findNumberSorted(String sortBy, int integer, int offse) throws SQLException;
+    List<Item> findNumberSorted(String sortBy, int integer, int offset) throws SQLException;
 }

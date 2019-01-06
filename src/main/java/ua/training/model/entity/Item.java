@@ -11,6 +11,7 @@ public class Item {
     private long price;
     private int number;
     private Check check;
+    private String category;
 
     public static Comparator<Item> ItemIdComparator = (s1, s2) -> {
         int id1 = s1.getId();
@@ -30,6 +31,12 @@ public class Item {
         return Long.compare(price1, price2);
     };
 
+    public static Comparator<Item> ItemCategoryComparator = (s1, s2) -> {
+        String category1 = s1.getCategory().toUpperCase();
+        String category2 = s2.getCategory().toUpperCase();
+        return category1.compareTo(category2);
+    };
+
     @Override
     public String toString() {
         return "Item{" +
@@ -37,6 +44,7 @@ public class Item {
                 ", name='" + name +
                 ", price=" + price +
                 ", number=" + number +
+                ", category=" + category +
                 '}';
     }
 
@@ -45,8 +53,10 @@ public class Item {
         final int PRIME = 31;
         int result = 1;
         result = result * PRIME + this.id;
+        result = result * PRIME + (this.name == null ? 0 : this.name.hashCode());
         result = result * PRIME + this.number;
         result = result * PRIME + (int) (this.price ^ (this.price >>> 32));
+        result = result * PRIME + (this.category == null ? 0 : this.category.hashCode());
         return result;
     }
 
@@ -58,6 +68,7 @@ public class Item {
         private long price;
         private int number;
         private Check check;
+        private String category;
 
         public Builder(int id) {
             this.id = id;
@@ -87,6 +98,11 @@ public class Item {
             return this;
         }
 
+        public Builder category(String category) {
+            this.category = category;
+            return this;
+        }
+
 
         public Item build() {
             Item item = new Item();
@@ -94,6 +110,7 @@ public class Item {
             item.name = this.name;
             item.price = this.price;
             item.number = this.number;
+            item.category = this.category;
             return item;
         }
     }

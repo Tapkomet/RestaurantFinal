@@ -38,14 +38,15 @@ public class JDBCCheckDao implements CheckDao {
         stmt.addBatch();
         stmt.executeBatch();
         stmt = connection.prepareStatement(
-                "insert into item_in_check (item_id, name, price, number, check_id)" +
-                        " values (?, ?, ?, ?, ?)");
+                "insert into item_in_check (item_id, name, price, number, check_id, category)" +
+                        " values (?, ?, ?, ?, ?, ?)");
         for (Item item : check.getItems()) {
             stmt.setInt(1, item.getId());
             stmt.setString(2, item.getName());
             stmt.setLong(3, item.getPrice());
             stmt.setInt(4, item.getNumber());
             stmt.setInt(5, item.getCheck().getId());
+            stmt.setString(6, item.getCategory());
             stmt.addBatch();
         }
         stmt.executeBatch();

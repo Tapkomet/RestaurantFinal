@@ -25,6 +25,7 @@ public class ItemListCommand implements Command {
             getAllItems(request, response);
         } else {
             List<Item> items = itemService.getItemsSortedBy(sortBy);
+            request.setAttribute("tosort", sortBy);
             request.setAttribute("items", items);
             forward(request, response, Path.ITEM_LIST);
         }

@@ -20,6 +20,7 @@
              Name <input type="text" name="name" value="${item.name}" readonly/><br>
              Number in stock <input type="number" name="number" value="${item.number}"/><br>
              Price<input type="number" name="price" value="${item.price}"/><br>
+             Category <input type="text" name="category" value="${item.category}"/><br>
              <input type="submit"/>
         </form>
 

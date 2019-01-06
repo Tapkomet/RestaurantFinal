@@ -24,10 +24,12 @@ public class EditItemCommand implements Command {
         String name = request.getParameter("name");
         int number = Integer.parseInt(request.getParameter("number"));
         long price = Long.parseLong(request.getParameter("price"));
+        String category = request.getParameter("category");
         Item item = new Item.Builder(id)
                 .itemName(name)
                 .number(number)
                 .price(price)
+                .category(category)
                 .build();
         itemService.update(item);
         response.sendRedirect(request.getContextPath() + Path.ADMIN_ITEMS);

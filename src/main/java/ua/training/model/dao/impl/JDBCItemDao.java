@@ -24,13 +24,15 @@ public class JDBCItemDao implements ItemDao {
         String name = item.getName();
         int number = item.getNumber();
         long price = item.getPrice();
+        String category = item.getCategory();
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into item (item_id, name, number, price)" +
-                        " values (?, ?, ?, ?)");
+                "insert into item (item_id, name, number, price, category)" +
+                        " values (?, ?, ?, ?, ?)");
         stmt.setInt(1, id);
         stmt.setString(2, name);
         stmt.setInt(3, number);
         stmt.setLong(4, price);
+        stmt.setString(5, category);
         stmt.executeUpdate();
 
         stmt.close();
@@ -80,12 +82,14 @@ public class JDBCItemDao implements ItemDao {
         int id = item.getId();
         int number = item.getNumber();
         long price = item.getPrice();
+        String category = item.getCategory();
         PreparedStatement stmt = connection.prepareStatement(
-                "update item set number = ?, price = ?" +
+                "update item set number = ?, price = ?, category = ?" +
                         " where item_id = ?");
-        stmt.setInt(3, id);
+        stmt.setInt(4, id);
         stmt.setInt(1, number);
         stmt.setLong(2, price);
+        stmt.setString(3, category);
         stmt.executeUpdate();
 
         stmt.close();
@@ -124,14 +128,15 @@ public class JDBCItemDao implements ItemDao {
     }
 
     @Override
-    public void addItem(int id, String name, int number, long price) throws SQLException {
+    public void addItem(int id, String name, int number, long price, String category) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into item (item_id, name, number, price)" +
-                        " values (?, ?, ?, ?)");
+                "insert into item (item_id, name, number, price, category)" +
+                        " values (?, ?, ?, ?, ?)");
         stmt.setInt(1, id);
         stmt.setString(2, name);
         stmt.setInt(3, number);
         stmt.setLong(4, price);
+        stmt.setString(5, category);
         stmt.executeUpdate();
 
         stmt.close();
@@ -174,6 +179,10 @@ public class JDBCItemDao implements ItemDao {
             case "price":
                 stmt = connection.prepareStatement
                         (" select * from item order by price+0 limit ? offset ?");
+                break;
+            case "catgory":
+                stmt = connection.prepareStatement
+                        (" select * from item order by category limit ? offset ?");
                 break;
             default:
                 break;

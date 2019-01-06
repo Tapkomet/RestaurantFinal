@@ -31,9 +31,9 @@ public class ItemService {
         }
     }
 
-    public void addItem(int id, String name, int number, long price) {
+    public void addItem(int id, String name, int number, long price, String category) {
         try (ItemDao itemDao = daoFactory.createItemDao()) {
-            itemDao.addItem(id, name, number, price);
+            itemDao.addItem(id, name, number, price, category);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,6 +75,9 @@ public class ItemService {
                     break;
                 case "price":
                     items.sort(Item.ItemPriceComparator);
+                    break;
+                case "category":
+                    items.sort(Item.ItemCategoryComparator);
                     break;
                 default:
                     break;

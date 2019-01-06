@@ -19,11 +19,11 @@
         </c:if>
         <table>
         <tr><th>Id</th><th>Name</th><th>Price</th>
-        <th>Total number</th><th></th></tr>
+        <th>Total number</th><th>Category</th><th></th></tr>
         <c:forEach var="i" items="${items}">
             <tr><td><a href="item?id=<c:out value='${i.id}' />"> <c:out value="${i.id}"/></a></td>
             <td>${i.name}</td><td>${i.price}</td>
-            <td>${i.number}</td>
+            <td>${i.number}</td><td>${i.category}</td>
             <td>
             <form action="${pageContext.request.contextPath}/api/admin/deleteItem?id=${i.id}"
              method="post">
@@ -57,6 +57,8 @@
          <c:if test="${tosort eq 'name'}">checked</c:if>>Name<br>
         <input type="radio" name="tosort" value="price"
          <c:if test="${tosort eq 'price'}">checked</c:if>>Price<br>
+        <input type="radio" name="tosort" value="category"
+         <c:if test="${tosort eq 'category'}">checked</c:if>>Category<br>
         <input type="submit" value="Sort"/>
         </form>
         <br>
@@ -76,6 +78,10 @@
              Price per unit<input type="number" name="price" min="1"/><br>
              <c:if test="${not empty price_error_message}">
                 <p class="error">${price_error_message}</p>
+             </c:if>
+             Category <input type="text" name="category"/><br>
+             <c:if test="${not empty category_error_message}">
+                <p class="error">${category_error_message}</p>
              </c:if>
              <input type="submit"/>
         </form>

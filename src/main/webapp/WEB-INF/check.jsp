@@ -23,11 +23,12 @@
 
         <table>
           <tr><th>Code</th><th>Name</th><th>Price</th>
-          <th>Total number</th><th>Check</th></tr>
+          <th>Total number</th><th>Check</th><th>Category</th></tr>
           <c:forEach var="i" items="${items}">
           <tr><td><c:out value="${i.id}"/></td>
           <td>${i.name}</td><td>${i.price}</td>
           <td>${i.number}</td><td>${i.check.id}</td>
+          <td>${i.category}</td>
           </c:forEach>
         </table>
         <br/>
