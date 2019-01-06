@@ -76,6 +76,7 @@ public class JDBCItemDao implements ItemDao {
 
     @Override
     public void update(Item item) throws SQLException {
+        System.out.println(item);
         int id = item.getId();
         int number = item.getNumber();
         long price = item.getPrice();

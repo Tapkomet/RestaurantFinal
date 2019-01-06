@@ -24,7 +24,8 @@ public class EditItemCommand implements Command {
         String name = request.getParameter("name");
         int number = Integer.parseInt(request.getParameter("number"));
         long price = Long.parseLong(request.getParameter("price"));
-        Item item = new Item.Builder(name)
+        Item item = new Item.Builder(id)
+                .itemName(name)
                 .number(number)
                 .price(price)
                 .build();
