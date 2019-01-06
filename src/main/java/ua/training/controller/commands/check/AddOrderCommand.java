@@ -36,6 +36,8 @@ public class AddOrderCommand implements ua.training.controller.commands.Command 
         String name;
         long price;
         int number;
+        String category;
+
 
 
         while (request.getParameter("id" + i) != null) {
@@ -43,18 +45,21 @@ public class AddOrderCommand implements ua.training.controller.commands.Command 
             name = request.getParameter("name" + i);
             price = (long) Double.parseDouble(request.getParameter("priceToAdd" + i));
             number = Integer.parseInt(request.getParameter("numberToAdd" + i));
+            category = request.getParameter("category" + i);
             totalPrice += price;
 
             Item item = new Item.Builder(id)
                     .itemName(name)
                     .price(price)
                     .number(number)
+                    .category(category)
                     .build();
             item.setCheck(check);
             items.add(item);
             i++;
         }
 
+        items = mergeItems(items);
         check.setTotalPrice(totalPrice);
         check.setClient((User) ((HttpServletRequest) request).getSession().getAttribute("user"));
         check.setItems(items);
@@ -64,5 +69,24 @@ public class AddOrderCommand implements ua.training.controller.commands.Command 
 
         checkService.create(check);
         redirect(request, response, Path.CLIENT_ORDERS);
+    }
+
+    private List<Item> mergeItems(List<Item> items) {
+        List<Item> mergedItems = new ArrayList<Item>();
+        items.forEach(item -> {
+            System.out.println(item);
+            boolean presentInMerged = false;
+            for (Item mergedItem : mergedItems) {
+                if (item.getId() == mergedItem.getId()) {
+                    System.out.println("merger");
+                    presentInMerged = true;
+                    mergedItem.setNumber(mergedItem.getNumber() + item.getNumber());
+                }
+            }
+            if (!presentInMerged) {
+                mergedItems.add(item);
+            }
+        });
+        return mergedItems;
     }
 }

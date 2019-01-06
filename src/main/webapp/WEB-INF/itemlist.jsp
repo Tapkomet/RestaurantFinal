@@ -52,7 +52,7 @@
         <form action="${pageContext.request.contextPath}/api/admin/items" method="get">
         Sort by: <br>
         <input type="radio" name="tosort" value="id"
-         <c:if test="${tosort eq 'id'}">checked</c:if>>Id<br>
+         <c:if test="${tosort eq 'id' || tosort eq null}">checked</c:if>>Id<br>
         <input type="radio" name="tosort" value="name"
          <c:if test="${tosort eq 'name'}">checked</c:if>>Name<br>
         <input type="radio" name="tosort" value="price"
@@ -63,23 +63,23 @@
         </form>
         <br>
         <form action="${pageContext.request.contextPath}/api/admin/addItem" method="post">
-             Id <input type="number" name="id" min="1"/><br>
+             Id <input type="number" name="id" min="1" required/><br>
              <c:if test="${not empty id_error_message}">
                 <p class="error">${id_error_message}</p>
              </c:if>
-             Name <input type="text" name="name"/><br>
+             Name <input type="text" name="name" required/><br>
              <c:if test="${not empty name_error_message}">
                 <p class="error">${name_error_message}</p>
              </c:if>
-             Number in stock <input type="number" name="number" min="1"/><br>
+             Number in stock <input type="number" name="number" min="1" required/><br>
              <c:if test="${not empty number_error_message}">
                 <p class="error">${number_error_message}</p>
              </c:if>
-             Price per unit<input type="number" name="price" min="1"/><br>
+             Price per unit<input type="number" name="price" min="1" required/><br>
              <c:if test="${not empty price_error_message}">
                 <p class="error">${price_error_message}</p>
              </c:if>
-             Category <input type="text" name="category"/><br>
+             Category <input type="text" name="category" required/><br>
              <c:if test="${not empty category_error_message}">
                 <p class="error">${category_error_message}</p>
              </c:if>

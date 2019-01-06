@@ -41,13 +41,32 @@ public class CheckService {
         }
     }
 
-
     public Check getCheckById(int id) {
         try (CheckDao dao = daoFactory.createCheckDao()) {
             return dao.findById(id);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public Check getOrderById(int id) {
+        try (CheckDao dao = daoFactory.createCheckDao()) {
+            return dao.findOrderById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Check> getAllOrdersByUser(int id) {
+        try (CheckDao checkDao = daoFactory.createCheckDao()) {
+            try {
+                return checkDao.findAllOrdersByUser(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 }

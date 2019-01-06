@@ -15,7 +15,7 @@
         <table>
         <tr><th>Id</th><th>Total price</th><th>Time</th></tr>
         <c:forEach var="i" items="${checks}">
-            <tr><td><a href="check?id=<c:out value='${i.id}' />"> <c:out value="${i.id}"/></a></td>
+            <tr><td><a href="order?id=<c:out value='${i.id}' />"> <c:out value="${i.id}"/></a></td>
             <td>${i.totalPrice}</td><td>${i.createTime}</td>
         </c:forEach>
         </table>

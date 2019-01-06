@@ -21,10 +21,9 @@ public class OrderCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
-        Check check = checkService.getCheckById(id);
+        Check check = checkService.getOrderById(id);
         request.setAttribute("check", check);
         request.setAttribute("items", check.getItems());
-        System.out.println(check.getItems());
-        forward(request, response, Path.CHECK);
+        forward(request, response, Path.ORDER);
     }
 }

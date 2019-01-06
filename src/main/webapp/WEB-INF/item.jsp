@@ -18,9 +18,9 @@
         <form action="${pageContext.request.contextPath}/api/admin/editItem" method="post">
              Id <input type="number" name="id" value="${item.id}" readonly/><br>
              Name <input type="text" name="name" value="${item.name}" readonly/><br>
-             Number in stock <input type="number" name="number" value="${item.number}"/><br>
-             Price<input type="number" name="price" value="${item.price}"/><br>
-             Category <input type="text" name="category" value="${item.category}"/><br>
+             Number in stock <input type="number" name="number" value="${item.number}"  min="1" required/><br>
+             Price<input type="number" name="price" value="${item.price}"  min="1" required/><br>
+             Category <input type="text" name="category" value="${item.category}" required/><br>
              <input type="submit"/>
         </form>
 

@@ -19,12 +19,14 @@ public interface Path {
     String ADMIN_BASE = "/WEB-INF/adminbase.jsp";
     String CLIENT_BASE = "/WEB-INF/clientbase.jsp";
     String CHECK_LIST = "/WEB-INF/checklist.jsp";
+    String ORDER_LIST = "/WEB-INF/orderlist.jsp";
     String ERROR = "/WEB-INF/error.jsp";
     String ITEM_LIST = "/WEB-INF/itemlist.jsp";
     String CLIENT_ITEM_LIST = "/WEB-INF/clientitemlist.jsp";
     String USER_LIST = "/WEB-INF/userlist.jsp";
     String ITEM = "/WEB-INF/item.jsp";
     String CHECK = "/WEB-INF/check.jsp";
+    String ORDER = "/WEB-INF/order.jsp";
     String INDEX = "/index.jsp";
     String LOGIN = "/login.jsp";
     String REGISTRATION = "/registration.jsp";

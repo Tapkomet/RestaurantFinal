@@ -95,6 +95,36 @@ public class JDBCCheckDao implements CheckDao {
         return check;
     }
 
+
+
+    @Override
+    public Check findOrderById(int id) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(
+                "select * from cheque" +
+                        " left join item_in_check on cheque.check_id = item_in_check.check_id" +
+                        " where cheque.check_id = (?) ");
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        CheckMapper checkMapper = new CheckMapper();
+
+        rs.next();
+        Check check = checkMapper.extractFromResultSet(rs);
+
+        List<Item> items = new ArrayList<>();
+        ItemMapper itemMapper = new ItemMapper();
+        do {
+            Item item = itemMapper
+                    .extractFromResultSetForCheck(rs);
+            items.add(item);
+        }
+        while(rs.next());
+        check.setItems(items);
+
+        stmt.close();
+        connection.close();
+        return check;
+    }
+
     @Override
     public List<Check> findAll() throws SQLException {
         Map<Integer, Check> checks = new HashMap<>();
@@ -103,6 +133,26 @@ public class JDBCCheckDao implements CheckDao {
                 "select * from cheque";
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(query);
+
+        CheckMapper checkMapper = new CheckMapper();
+
+        while (rs.next()) {
+            Check check = checkMapper
+                    .extractFromResultSet(rs);
+            check = checkMapper
+                    .makeUnique(checks, check);
+        }
+        return new ArrayList<>(checks.values());
+    }
+
+    @Override
+    public List<Check> findAllOrdersByUser(int id) throws SQLException {
+        Map<Integer, Check> checks = new HashMap<>();
+
+        PreparedStatement stmt = connection.prepareStatement(
+                "select * from cheque WHERE client_id = (?)");
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
 
         CheckMapper checkMapper = new CheckMapper();
 

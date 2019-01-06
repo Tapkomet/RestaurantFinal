@@ -26,11 +26,11 @@
 
         <br>
         <form method="POST" action="${pageContext.request.contextPath}/api/user-login">
-            E-mail <input type="text" name="email"/><br>
+            E-mail <input type="text" name="email" required/><br>
             <c:if test="${not empty email_error_message}">
             	<p class="error">${email_error_message}</p>
             </c:if>
-            Password <input type="password" name = "pass"/><br>
+            Password <input type="password" name = "pass" required/><br>
             <c:if test="${not empty password_error_message}">
                 <p class="error">${password_error_message}</p>
             </c:if>
