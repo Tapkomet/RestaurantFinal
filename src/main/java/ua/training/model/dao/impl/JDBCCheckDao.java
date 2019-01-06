@@ -22,6 +22,7 @@ public class JDBCCheckDao implements CheckDao {
 
     @Override
     public void create(Check check) throws SQLException {
+        connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
         int id = check.getId();
         long totalPrice = check.getTotalPrice();
         int clientId = check.getClient().getId();
@@ -48,8 +49,19 @@ public class JDBCCheckDao implements CheckDao {
             stmt.addBatch();
         }
         stmt.executeBatch();
+        
+        stmt = connection.prepareStatement
+                ("update item set number = number - ?" +
+                        " where item_id = ?");
+        for(Item item : check.getItems()){
+            stmt.setInt(2, item.getId());
+            stmt.setInt(1, item.getNumber());
+            stmt.addBatch();
+        }
+        stmt.executeBatch();
         connection.commit();
         connection.setAutoCommit(true);
+        connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         stmt.close();
         connection.close();
     }

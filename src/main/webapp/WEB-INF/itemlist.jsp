@@ -61,7 +61,7 @@
         </form>
         <br>
         <form action="${pageContext.request.contextPath}/api/admin/addItem" method="post">
-             Id <input type="number" name="id"/><br>
+             Id <input type="number" name="id" min="1"/><br>
              <c:if test="${not empty id_error_message}">
                 <p class="error">${id_error_message}</p>
              </c:if>
@@ -69,11 +69,11 @@
              <c:if test="${not empty name_error_message}">
                 <p class="error">${name_error_message}</p>
              </c:if>
-             Number in stock <input type="number" name="number"/><br>
+             Number in stock <input type="number" name="number" min="1"/><br>
              <c:if test="${not empty number_error_message}">
                 <p class="error">${number_error_message}</p>
              </c:if>
-             Price per unit<input type="number" name="price"/><br>
+             Price per unit<input type="number" name="price" min="1"/><br>
              <c:if test="${not empty price_error_message}">
                 <p class="error">${price_error_message}</p>
              </c:if>
