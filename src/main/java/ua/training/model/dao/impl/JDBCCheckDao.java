@@ -165,6 +165,46 @@ public class JDBCCheckDao implements CheckDao {
         return new ArrayList<>(checks.values());
     }
 
+    @Override
+    public void issue(Check check) throws SQLException {
+        int id = check.getId();
+        PreparedStatement stmt = connection.prepareStatement(
+                "update cheque set is_check = true" +
+                        " where check_id = ?");
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
+
+    @Override
+    public void confirm(Check check) throws SQLException {
+        int id = check.getId();
+        int adminId = check.getAdmin().getId();
+        PreparedStatement stmt = connection.prepareStatement(
+                "update cheque set is_confirmed = true, admin_id = ?" +
+                        " where check_id = ?");
+        stmt.setInt(1, adminId);
+        stmt.setInt(2, id);
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
+
+    @Override
+    public void pay(Check check) throws SQLException {
+        int id = check.getId();
+        long tip = check.getTip();
+        PreparedStatement stmt = connection.prepareStatement(
+                "update cheque set is_paid = true, tip = ?" +
+                        " where check_id = ?");
+        stmt.setLong(1, tip);
+        stmt.setInt(2, id);
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
+
 
     @Override
     public void update(Check check) {

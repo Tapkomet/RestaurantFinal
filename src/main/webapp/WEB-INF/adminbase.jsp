@@ -13,8 +13,6 @@
         <br>
         <a href="${pageContext.request.contextPath}/api/admin/items">Item List</a>
         <br>
-        <a href="${pageContext.request.contextPath}/api/admin/check">Check List</a>
-        <br>
         <a href="${pageContext.request.contextPath}/api/client">View as Client</a>
         <br>
         <a href="${pageContext.request.contextPath}/index.jsp">View Start Page</a>

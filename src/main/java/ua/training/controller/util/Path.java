@@ -5,6 +5,7 @@ public interface Path {
     String ADMIN_EDIT_USER = "/api/admin/users/edit";
     String CLIENT = "/api/client";
     String CLIENT_ORDERS = "/api/client/orders";
+    String ADMIN_CHECKS = "/api/admin/checks";
     String CLIENT_ORDERS_ADD = "/api/client/orders/add";
     String ADMIN_ITEMS = "/api/admin/items";
     String ADMIN_ITEM = "/api/admin/item";

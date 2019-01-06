@@ -15,7 +15,14 @@
 
         <br>
         <br>
-        <p>Check id: ${check.id}, total price: ${check.totalPrice}, time created: ${check.createTime}</p>
+        <p>Check id: ${check.id}, total price: ${check.totalPrice}, time created: ${check.createTime}
+        <br>
+        Has been accepted: ${check.confirmed}
+        <c:if test="${check.confirmed eq true}">
+        , waiter: ${check.admin.id}, has been issued as a check: ${check.check}
+        </c:if>
+        </p>
+
         <br>
         <h2>
             The items: <br/>
@@ -32,6 +39,13 @@
           </c:forEach>
         </table>
         <br/>
+        <c:if test="${check.check eq true}">
+        <form action="${pageContext.request.contextPath}/api/client/order/pay?id=${check.id}" method="post">
+            Tip: <input type="number" name = "tip" min = "0" value = "0">
+            <br>
+            <button type="submit" class="btn btn-default" name="nextPage">Pay</button>
+        </form>
+        </c:if>
         <a href="${pageContext.request.contextPath}/index.jsp">index</a>
     </body>
 </html>

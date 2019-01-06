@@ -69,4 +69,28 @@ public class CheckService {
             }
         }
     }
+
+    public void confirm(Check check) {
+        try (CheckDao checkDao = daoFactory.createCheckDao()) {
+            checkDao.confirm(check);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void issue(Check check) {
+        try (CheckDao checkDao = daoFactory.createCheckDao()) {
+            checkDao.issue(check);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pay(Check check) {
+        try (CheckDao checkDao = daoFactory.createCheckDao()) {
+            checkDao.pay(check);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
