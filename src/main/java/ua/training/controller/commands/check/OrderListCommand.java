@@ -24,7 +24,7 @@ public class OrderListCommand implements Command {
             throws ServletException, IOException {
         User user = (User) ((HttpServletRequest) request).getSession().getAttribute("user");
         List<Check> orders = checkService.getAllOrdersByUser(user.getId());
-        request.setAttribute("checks" , orders);
+        request.setAttribute("checks", orders);
         forward(request, response, Path.ORDER_LIST);
     }
 }

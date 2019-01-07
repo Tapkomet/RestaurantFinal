@@ -22,7 +22,7 @@ public class CheckListCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Check> checks = checkService.getAllChecks();
-        request.setAttribute("checks" , checks);
+        request.setAttribute("checks", checks);
         forward(request, response, Path.CHECK_LIST);
     }
 }

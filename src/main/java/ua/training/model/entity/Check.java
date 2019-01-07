@@ -210,7 +210,7 @@ public class Check {
             this.paid = paid;
             return this;
         }
-        
+
         public Builder tip(long tip) {
             this.tip = tip;
             return this;

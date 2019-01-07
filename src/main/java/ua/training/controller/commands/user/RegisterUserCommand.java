@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class RegisterUserCommand implements Command {
 
-    private UserService userService ;
+    private UserService userService;
 
     public RegisterUserCommand(UserService userService) {
         this.userService = userService;
@@ -34,7 +34,7 @@ public class RegisterUserCommand implements Command {
             forward(request, response, Path.REGISTRATION);
             return;
         }
-        if(pass == null || pass.equals("")){
+        if (pass == null || pass.equals("")) {
             request.setAttribute("password_error_message", "Put in the password");
             forward(request, response, Path.REGISTRATION);
             return;
@@ -57,7 +57,7 @@ public class RegisterUserCommand implements Command {
             return;
         }
 
-            userService.register(surname, email, pass);
+        userService.register(surname, email, pass);
 
         request.setAttribute("index_message", "Registration successful");
         forward(request, response, Path.INDEX);

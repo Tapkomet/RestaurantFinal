@@ -21,7 +21,7 @@ public class ItemMapper implements ObjectMapper<Item> {
         return item;
     }
 
-    
+
     public Item extractFromResultSetForCheck(ResultSet rs) throws SQLException {
         Item item = new Item();
         item.setId(rs.getInt("item_id"));
@@ -37,7 +37,7 @@ public class ItemMapper implements ObjectMapper<Item> {
 
     @Override
     public Item makeUnique(Map<Integer, Item> cache,
-                              Item item) {
+                           Item item) {
         cache.putIfAbsent(item.getId(), item);
         return cache.get(item.getId());
     }

@@ -23,8 +23,8 @@ class CommandUtility {
         session.setAttribute("user", user);
     }
 
-    static boolean checkUserIsLogged(HttpServletRequest request, String email){
-        if(request.getSession().getAttribute("user")!=null){
+    static boolean checkUserIsLogged(HttpServletRequest request, String email) {
+        if (request.getSession().getAttribute("user") != null) {
             return true;
         }
         return false;

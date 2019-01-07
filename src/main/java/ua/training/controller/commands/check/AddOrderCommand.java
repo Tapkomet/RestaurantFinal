@@ -39,7 +39,6 @@ public class AddOrderCommand implements ua.training.controller.commands.Command 
         String category;
 
 
-
         while (request.getParameter("id" + i) != null) {
             id = Integer.parseInt(request.getParameter("id" + i));
             name = request.getParameter("name" + i);

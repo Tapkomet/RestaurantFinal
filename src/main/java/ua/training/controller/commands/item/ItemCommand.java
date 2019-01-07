@@ -22,7 +22,7 @@ public class ItemCommand implements Command {
         String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
         Item item = itemService.getItemById(id);
-        request.setAttribute("item" , item);
+        request.setAttribute("item", item);
         forward(request, response, Path.ITEM);
     }
 }

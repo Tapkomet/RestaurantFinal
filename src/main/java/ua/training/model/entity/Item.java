@@ -16,7 +16,7 @@ public class Item {
     public static Comparator<Item> ItemIdComparator = (s1, s2) -> {
         int id1 = s1.getId();
         int id2 = s2.getId();
-        return id1-id2;
+        return id1 - id2;
     };
 
     public static Comparator<Item> ItemNameComparator = (s1, s2) -> {

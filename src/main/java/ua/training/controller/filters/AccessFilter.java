@@ -19,7 +19,8 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
         User user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
-        HttpServletRequest request = (HttpServletRequest) servletRequest;HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
         String loginURI = request.getContextPath() + Path.LOGIN;
         String path = request.getRequestURI();
         String roleRequired = "";
@@ -27,14 +28,14 @@ public class AccessFilter implements Filter {
         else if (path.contains("client")) roleRequired = "client";
         switch (roleRequired) {
             case "admin":
-                if (user!=null&&(user.getRole() == User.ROLE.ADMIN)) {
+                if (user != null && (user.getRole() == User.ROLE.ADMIN)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
                     response.sendRedirect(loginURI);
                 }
                 break;
             case "client":
-                if (user!=null&&(user.getRole() == User.ROLE.CLIENT || user.getRole() == User.ROLE.ADMIN)) {
+                if (user != null && (user.getRole() == User.ROLE.CLIENT || user.getRole() == User.ROLE.ADMIN)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
                     response.sendRedirect(loginURI);

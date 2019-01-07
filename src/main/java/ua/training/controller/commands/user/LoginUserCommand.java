@@ -33,7 +33,7 @@ public class LoginUserCommand implements Command {
             forward(request, response, Path.LOGIN);
             return;
         }
-        if(pass == null || pass.equals("")){
+        if (pass == null || pass.equals("")) {
             request.setAttribute("password_error_message", "Put in the password");
             forward(request, response, Path.LOGIN);
             return;

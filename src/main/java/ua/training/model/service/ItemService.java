@@ -11,7 +11,7 @@ public class ItemService {
 
     DaoFactory daoFactory = DaoFactory.getInstance();
 
-    public List<Item> getAllItems(){
+    public List<Item> getAllItems() {
         try (ItemDao itemDao = daoFactory.createItemDao()) {
             try {
                 return itemDao.findAll();
@@ -22,7 +22,7 @@ public class ItemService {
         }
     }
 
-    public Item getItemById(int id){
+    public Item getItemById(int id) {
         try (ItemDao dao = daoFactory.createItemDao()) {
             return dao.findById(id);
         } catch (SQLException e) {
@@ -39,7 +39,7 @@ public class ItemService {
         }
     }
 
-    public void create(Item item){
+    public void create(Item item) {
         try (ItemDao itemDao = daoFactory.createItemDao()) {
             itemDao.create(item);
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class ItemService {
         }
     }
 
-    public void update(Item item){
+    public void update(Item item) {
         try (ItemDao itemDao = daoFactory.createItemDao()) {
             itemDao.update(item);
         } catch (SQLException e) {
@@ -55,7 +55,7 @@ public class ItemService {
         }
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         try (ItemDao itemDao = daoFactory.createItemDao()) {
             itemDao.delete(id);
         } catch (SQLException e) {

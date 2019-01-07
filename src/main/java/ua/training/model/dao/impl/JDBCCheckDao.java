@@ -50,11 +50,11 @@ public class JDBCCheckDao implements CheckDao {
             stmt.addBatch();
         }
         stmt.executeBatch();
-        
+
         stmt = connection.prepareStatement
                 ("update item set number = number - ?" +
                         " where item_id = ?");
-        for(Item item : check.getItems()){
+        for (Item item : check.getItems()) {
             stmt.setInt(2, item.getId());
             stmt.setInt(1, item.getNumber());
             stmt.addBatch();
@@ -87,14 +87,13 @@ public class JDBCCheckDao implements CheckDao {
                     .extractFromResultSetForCheck(rs);
             items.add(item);
         }
-        while(rs.next());
+        while (rs.next());
         check.setItems(items);
 
         stmt.close();
         connection.close();
         return check;
     }
-
 
 
     @Override
@@ -117,7 +116,7 @@ public class JDBCCheckDao implements CheckDao {
                     .extractFromResultSetForCheck(rs);
             items.add(item);
         }
-        while(rs.next());
+        while (rs.next());
         check.setItems(items);
 
         stmt.close();
