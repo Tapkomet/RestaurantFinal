@@ -83,7 +83,7 @@
              <c:if test="${not empty category_error_message}">
                 <p class="error">${category_error_message}</p>
              </c:if>
-             <input type="submit"/>
+             <input type="submit" value="Add new"/>
         </form>
 
         <br/>

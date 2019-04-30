@@ -39,7 +39,7 @@
           </c:forEach>
         </table>
         <br/>
-        <c:if test="${check.check eq true}">
+        <c:if test="${check.check eq true && check.paid eq false}">
         <form action="${pageContext.request.contextPath}/api/client/order/pay?id=${check.id}" method="post">
             Tip: <input type="number" name = "tip" min = "0" value = "0">
             <br>

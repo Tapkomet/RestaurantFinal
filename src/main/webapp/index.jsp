@@ -7,9 +7,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Doctor App</title>
+    <title>Restaurant</title>
 </head>
     <body>
+        <h2>
+            Landing page <br/>
+        </h2>
         <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/logout">Logout</a>

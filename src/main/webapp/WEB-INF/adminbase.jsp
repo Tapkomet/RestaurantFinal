@@ -9,6 +9,10 @@
     <title>Admin Base</title>
 </head>
     <body>
+        <h2>
+            Admin base <br/>
+
+        </h2>
         <a href="${pageContext.request.contextPath}/api/logout">Logout</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/admin/items">Item List</a>

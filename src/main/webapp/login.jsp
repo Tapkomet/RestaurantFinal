@@ -37,8 +37,11 @@
             <c:if test="${not empty login_error_message}">
             	<p class="error">${login_error_message}</p>
             </c:if>
-            <input type="submit"/>
+            <input type="submit" value="Login"/>
         </form>
+
+        <br/>
+        <a href="${pageContext.request.contextPath}/index.jsp">index</a>
        </div>
     </body>
 </html>

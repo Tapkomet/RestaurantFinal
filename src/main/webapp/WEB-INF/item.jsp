@@ -21,7 +21,7 @@
              Number in stock <input type="number" name="number" value="${item.number}"  min="1" required/><br>
              Price<input type="number" name="price" value="${item.price}"  min="1" required/><br>
              Category <input type="text" name="category" value="${item.category}" required/><br>
-             <input type="submit"/>
+             <input type="submit" value="Edit"/>
         </form>
 
         <br/>

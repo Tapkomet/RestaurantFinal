@@ -43,7 +43,6 @@
         <h2>
             List Items <br/>
         </h2>
-        <button id="btn1">Append text</button>
         <table id="itemtable">
         <tr><th>Id</th><th>Name</th><th>Price</th>
         <th>Total number</th>
@@ -52,6 +51,7 @@
         <c:forEach var="i" items="${items}">
             <tr><td class="id"><a href="item?id=<c:out value='${i.id}'/>"><c:out value="${i.id}"/></a></td>
             <td class="name">${i.name}</td><td class="price">${i.price}</td>
+            <td class="number">${i.number}</td>
             <td class="numberInput"><input type="number"></td><td class="category">${i.category}</td>
             <td>
             <button class="addbutton" id="btn1">Add to check</button>
